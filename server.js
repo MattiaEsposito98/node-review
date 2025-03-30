@@ -11,7 +11,7 @@ app.get('/', (req, res) => {
   res.send('Server running')
 })
 
-app.use(dataRouter)
+app.use('/data', dataRouter)
 
 app.listen(port, () => {
   console.log(`Server running on port ${port}`)

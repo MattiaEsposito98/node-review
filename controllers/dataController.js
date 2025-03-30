@@ -5,8 +5,24 @@ function index(req, res) {
 
   connection.query(sql, (err, results) => {
     if (err) return res.status(404).send('Pagina non trovata')
-    res.json(results)
+    res.send(results)
   })
 }
 
-module.exports = { index }
+function show(req, res) {
+  const { id } = req.params
+
+  const sql = `SELECT * FROM esercizi_mysql.studenti
+              where studenti.id = ?`
+
+  connection.query(sql, [id], (err, result) => {
+    if (result.length === 0) return res.status(404).send('Risultato non trovato')
+    res.send(result[0])
+
+  })
+
+
+
+}
+
+module.exports = { index, show }
